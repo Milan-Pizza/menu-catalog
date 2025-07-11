@@ -7,6 +7,7 @@ import app.milanpizza.menucatalog.dto.response.menu.MenuSummaryResponse;
 import app.milanpizza.menucatalog.service.MenuService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +49,13 @@ public class MenuController extends BaseController {
 
     @GetMapping("/date-range")
     public ResponseEntity<List<MenuSummaryResponse>> getMenusByDateRange(
-            @RequestParam LocalDate startDate,
-            @RequestParam LocalDate endDate) {
-        List<MenuSummaryResponse> response = menuService.getMenusByDateRange(startDate, endDate);
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+        // Default: if endDate not provided, use startDate + 3 months
+        LocalDate effectiveEndDate = endDate != null ? endDate : startDate.plusMonths(3);
+
+        List<MenuSummaryResponse> response = menuService.getMenusByDateRange(startDate, effectiveEndDate);
         return ResponseEntity.ok(response);
     }
 
