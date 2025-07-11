@@ -1,0 +1,17 @@
+spring:
+  config:
+    import: "configserver:http://config-server-app:8888"
+  data:
+    mongodb:
+      uri: mongodb://devuser:devpassword@infra-mongodb-1:27017/menuservice_db?authSource=admin
+
+  cloud:
+    consul:
+      host: infra-consul-1
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 10s

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: menu-catalog
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/menu-catalog-test
+      auto-index-creation: true
+      repositories:
+        type: auto
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration

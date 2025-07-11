@@ -1,0 +1,55 @@
+server:
+  address: 0.0.0.0
+  port: 8081
+#  servlet:
+#    context-path: /menu-service
+
+spring:
+  application:
+    name: menu-catalog
+
+  config:
+    import: "configserver:http://localhost:8888"
+
+  data:
+    mongodb:
+      uri: mongodb://devuser:devpassword@localhost:27017/menuservice_db?authSource=admin
+
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/cloud-kitchen
+
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  tracing:
+#    enabled: true
+#    sampling:
+#      probability: 1.0  # 100% sampling rate
+#    propagation:
+#      type: w3c
+
+
+logging:
+  #  pattern:
+  #    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
+  level:
+    root: info
+#    io.opentelemetry: DEBUG
+#    io.opentelemetry.exporter: DEBUG
+#    io.opentelemetry.sdk.trace.export: DEBUG
+#    io.opentelemetry.exporter.otlp: DEBUG
+#    org.springframework.security: DEBUG
+#    org.springframework.web.reactive.function.client: DEBUG
+#    org.springframework.data.mongodb: DEBUG
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
