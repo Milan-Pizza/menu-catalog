@@ -1,15 +1,21 @@
 package app.milanpizza.menucatalog.service.impl;
 
 import app.milanpizza.menucatalog.domain.Menu;
+import app.milanpizza.menucatalog.domain.combo.ComboMeal;
+import app.milanpizza.menucatalog.domain.item.Drink;
+import app.milanpizza.menucatalog.domain.item.SideItem;
 import app.milanpizza.menucatalog.domain.pizza.Pizza;
 import app.milanpizza.menucatalog.dto.request.menu.CreateMenuRequest;
 import app.milanpizza.menucatalog.dto.request.menu.UpdateMenuRequest;
 import app.milanpizza.menucatalog.dto.response.menu.MenuDetailedResponse;
 import app.milanpizza.menucatalog.dto.response.menu.MenuSummaryResponse;
 import app.milanpizza.menucatalog.exception.BadRequestException;
-import app.milanpizza.menucatalog.mapper.MenuMapper;
-import app.milanpizza.menucatalog.mapper.PizzaMapper;
+import app.milanpizza.menucatalog.exception.ResourceNotFoundException;
+import app.milanpizza.menucatalog.mapper.*;
 import app.milanpizza.menucatalog.repository.MenuRepository;
+import app.milanpizza.menucatalog.repository.combo.ComboMealRepository;
+import app.milanpizza.menucatalog.repository.item.DrinkRepository;
+import app.milanpizza.menucatalog.repository.item.SideItemRepository;
 import app.milanpizza.menucatalog.repository.pizza.PizzaRepository;
 import app.milanpizza.menucatalog.service.MenuService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +35,12 @@ public class MenuServiceImpl implements MenuService {
     private final MenuMapper menuMapper;
     private final PizzaRepository pizzaRepository;
     private final PizzaMapper pizzaMapper;
+    private final ComboMealRepository comboMealRepository;
+    private final ComboMapper comboMapper;
+    private final SideItemRepository sideItemRepository;
+    private final SideItemMapper sideItemMapper;
+    private final DrinkRepository drinkRepository;
+    private final DrinkMapper drinkMapper;
 
     @Override
     @Transactional
@@ -49,15 +61,42 @@ public class MenuServiceImpl implements MenuService {
     public MenuDetailedResponse getMenuById(String id) {
         // Get menu by id
         Menu menu = menuRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Menu not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Menu not found with id: " + id));
 
         // Get the menu with pizzas populated
         MenuDetailedResponse response = menuMapper.toDetailedResponse(menu);
 
         // Fetch pizzas from pizza collection using menuId and populate the response
         List<Pizza> pizzas = pizzaRepository.findByMenuId(id);
-        System.out.println(pizzas);
-//        response.setPizzas(pizzas);
+        response.setPizzas(
+                pizzas.stream()
+                        .map(pizzaMapper::toSummaryResponse)
+                        .toList()
+        );
+
+        // Fetch combo from combo collection using menuId and populate the response
+        List<ComboMeal> combos = comboMealRepository.findByMenuId(id);
+        response.setCombos(
+                combos.stream()
+                        .map(comboMapper::toSummaryResponse)
+                        .toList()
+        );
+
+        // Fetch side items from side item collection using menuId and populate the response
+        List<SideItem> sideItems = sideItemRepository.findByMenuId(id);
+        response.setSideItems(
+                sideItems.stream()
+                        .map(sideItemMapper::toResponse)
+                        .toList()
+        );
+
+        // Fetch drinks from drink collection using menuId and populate the response
+        List<Drink> drinks = drinkRepository.findByMenuId(id);
+        response.setDrinks(
+                drinks.stream()
+                        .map(drinkMapper::toResponse)
+                        .toList()
+        );
 
         return response;
     }
