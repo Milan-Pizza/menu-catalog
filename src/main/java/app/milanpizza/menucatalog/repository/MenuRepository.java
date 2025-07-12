@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -25,4 +26,6 @@ public interface MenuRepository extends MongoRepository<Menu, String> {
     boolean existsByRegionCodeAndName(String regionCode, String name);
 
     List<Menu> findByValidFromBetween(LocalDate startDate, LocalDate endDate);
+
+    List<Menu> findByValidFromLessThanEqualAndValidToGreaterThanEqual(LocalDate endDate, LocalDate startDate);
 }

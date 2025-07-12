@@ -4,7 +4,6 @@ import app.milanpizza.menucatalog.dto.request.item.CreateDrinkRequest;
 import app.milanpizza.menucatalog.dto.request.item.UpdateDrinkRequest;
 import app.milanpizza.menucatalog.dto.response.item.DrinkResponse;
 import app.milanpizza.menucatalog.service.item.DrinkService;
-import app.milanpizza.menucatalog.controller.BaseController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/drinks")
 @RequiredArgsConstructor
-public class DrinkController extends BaseController {
+public class DrinkController {
 
     private final DrinkService drinkService;
 

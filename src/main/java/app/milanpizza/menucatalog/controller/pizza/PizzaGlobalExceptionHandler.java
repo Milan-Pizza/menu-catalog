@@ -3,7 +3,8 @@ package app.milanpizza.menucatalog.controller.pizza;
 import app.milanpizza.menucatalog.dto.request.config.PizzaBaseRequest;
 import app.milanpizza.menucatalog.dto.response.pizza.PizzaBaseResponse;
 import app.milanpizza.menucatalog.service.pizza.PizzaBaseService;
-import app.milanpizza.menucatalog.controller.BaseController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,13 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pizza-bases")
 @RequiredArgsConstructor
-public class PizzaBaseController extends BaseController {
+public class PizzaGlobalExceptionHandler {
 
     private final PizzaBaseService pizzaBaseService;
 
     @PostMapping
-    public ResponseEntity<PizzaBaseResponse> createPizzaBase(
-            @Valid @RequestBody PizzaBaseRequest request) {
+    public ResponseEntity<PizzaBaseResponse> createPizzaBase(@Valid @RequestBody PizzaBaseRequest request) {
         PizzaBaseResponse response = pizzaBaseService.createPizzaBase(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -39,8 +39,14 @@ public class PizzaBaseController extends BaseController {
     }
 
     @GetMapping("/texture/{texture}")
+    @Operation(summary = "Get pizza bases by texture",
+              description = "Retrieves all pizza bases with the specified texture")
     public ResponseEntity<List<PizzaBaseResponse>> getPizzaBasesByTexture(
-            @PathVariable String texture) {
+            @PathVariable
+            @Schema(description = "Texture of the pizza base",
+                    allowableValues = {"THIN", "THICK", "STUFFED"},
+                    example = "THIN")
+            String texture) {
         List<PizzaBaseResponse> response = pizzaBaseService.getPizzaBasesByTexture(texture);
         return ResponseEntity.ok(response);
     }

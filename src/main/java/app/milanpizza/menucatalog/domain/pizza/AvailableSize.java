@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.*;
 
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "available_sizes")
 public class AvailableSize extends BaseDocument {

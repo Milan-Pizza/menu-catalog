@@ -5,7 +5,6 @@ import app.milanpizza.menucatalog.dto.request.combo.UpdateComboRequest;
 import app.milanpizza.menucatalog.dto.response.combo.ComboDetailedResponse;
 import app.milanpizza.menucatalog.dto.response.combo.ComboSummaryResponse;
 import app.milanpizza.menucatalog.service.combo.ComboService;
-import app.milanpizza.menucatalog.controller.BaseController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/combos")
 @RequiredArgsConstructor
-public class ComboController extends BaseController {
+public class ComboController {
 
     private final ComboService comboService;
 

@@ -14,4 +14,6 @@ public interface PizzaBaseRepository extends MongoRepository<PizzaBase, String> 
     List<PizzaBase> findByIsVegan(boolean isVegan);
 
     List<PizzaBase> findByTexture(String texture);
+
+    boolean existsByName(String name);
 }

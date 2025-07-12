@@ -23,7 +23,7 @@ public class PizzaDetailedResponse {
     private Boolean isPopular;
     private Map<String, Object> tags;
 
-    private PizzaBaseResponse base;
+    private List<PizzaBaseResponse> pizzaBases;
     private List<AvailableSizeResponse> availableSizes;
     private List<AllowedToppingResponse> allowedToppings;
     private RecipeResponse recipe;

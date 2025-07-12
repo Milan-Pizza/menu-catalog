@@ -1,6 +1,7 @@
 package app.milanpizza.menucatalog.service.pizza;
 
 import app.milanpizza.menucatalog.dto.request.pizza.CreatePizzaRequest;
+import app.milanpizza.menucatalog.dto.request.pizza.PizzaSizeConfigRequest;
 import app.milanpizza.menucatalog.dto.request.pizza.PizzaToppingConfigRequest;
 import app.milanpizza.menucatalog.dto.request.pizza.UpdatePizzaRequest;
 import app.milanpizza.menucatalog.dto.response.pizza.PizzaDetailedResponse;
@@ -14,6 +15,7 @@ public interface PizzaService {
     List<PizzaSummaryResponse> getAvailablePizzasByMenu(String menuId);
     PizzaDetailedResponse updatePizza(String id, UpdatePizzaRequest request);
     void togglePizzaAvailability(String id);
+    void addSizeToPizza(PizzaSizeConfigRequest request);
     void addToppingToPizza(PizzaToppingConfigRequest request);
     void removeToppingFromPizza(String pizzaId, String toppingId);
     void deletePizza(String id);

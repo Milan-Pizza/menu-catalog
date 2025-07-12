@@ -1,12 +1,12 @@
 package app.milanpizza.menucatalog.controller.pizza;
 
 import app.milanpizza.menucatalog.dto.request.pizza.CreatePizzaRequest;
+import app.milanpizza.menucatalog.dto.request.pizza.PizzaSizeConfigRequest;
 import app.milanpizza.menucatalog.dto.request.pizza.PizzaToppingConfigRequest;
 import app.milanpizza.menucatalog.dto.request.pizza.UpdatePizzaRequest;
 import app.milanpizza.menucatalog.dto.response.pizza.PizzaDetailedResponse;
 import app.milanpizza.menucatalog.dto.response.pizza.PizzaSummaryResponse;
 import app.milanpizza.menucatalog.service.pizza.PizzaService;
-import app.milanpizza.menucatalog.controller.BaseController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pizzas")
 @RequiredArgsConstructor
-public class PizzaController extends BaseController {
+public class PizzaController {
 
     private final PizzaService pizzaService;
 
@@ -61,6 +61,14 @@ public class PizzaController extends BaseController {
     public ResponseEntity<Void> togglePizzaAvailability(@PathVariable String id) {
         pizzaService.togglePizzaAvailability(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{pizzaId}/sizes")
+    public ResponseEntity<Void> addSizesToPizza(
+            @PathVariable String pizzaId,
+            @Valid @RequestBody PizzaSizeConfigRequest request) {
+        pizzaService.addSizeToPizza(request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/{pizzaId}/toppings")

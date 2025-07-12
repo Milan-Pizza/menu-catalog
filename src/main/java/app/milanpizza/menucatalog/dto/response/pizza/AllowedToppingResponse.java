@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AllowedToppingResponse {
-    private String pizzaId;
+//    private String pizzaId;
     private String toppingId;
     private String toppingName;
     private Double baseAdditionalPrice;

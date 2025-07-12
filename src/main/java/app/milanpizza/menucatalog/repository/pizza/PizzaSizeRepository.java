@@ -12,4 +12,6 @@ public interface PizzaSizeRepository extends MongoRepository<PizzaSize, String> 
     List<PizzaSize> findByIsPopular(boolean isPopular);
 
     List<PizzaSize> findByName(String name);
+
+    boolean existsByName(String name);
 }

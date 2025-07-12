@@ -4,7 +4,6 @@ import app.milanpizza.menucatalog.dto.request.item.CreateSideItemRequest;
 import app.milanpizza.menucatalog.dto.request.item.UpdateSideItemRequest;
 import app.milanpizza.menucatalog.dto.response.item.SideItemResponse;
 import app.milanpizza.menucatalog.service.item.SideItemService;
-import app.milanpizza.menucatalog.controller.BaseController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/side-items")
 @RequiredArgsConstructor
-public class SideItemController extends BaseController {
+public class SideItemController {
 
     private final SideItemService sideItemService;
 

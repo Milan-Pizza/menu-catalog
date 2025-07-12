@@ -1,6 +1,7 @@
 package app.milanpizza.menucatalog.dto.request.config;
 
 import app.milanpizza.menucatalog.domain.enums.PizzaBaseTexture;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import jakarta.validation.constraints.*;
 
@@ -28,6 +29,8 @@ public class PizzaBaseRequest {
     private Integer defaultBakingTimeSeconds;
 
     @NotNull
+    @Schema(description = "Texture of the pizza base", example = "THIN",
+             allowableValues = {"THIN", "THICK", "STUFFED"})
     private PizzaBaseTexture texture;
 
     @DecimalMin("0.1")

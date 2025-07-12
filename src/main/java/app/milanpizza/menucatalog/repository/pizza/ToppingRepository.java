@@ -16,4 +16,7 @@ public interface ToppingRepository extends MongoRepository<Topping, String> {
     List<Topping> findByIsVegan(boolean isVegan);
 
     List<Topping> findByIsPremium(boolean isPremium);
+
+    boolean existsByName(String name);
+
 }

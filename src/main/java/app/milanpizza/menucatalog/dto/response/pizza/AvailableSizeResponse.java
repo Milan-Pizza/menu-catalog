@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AvailableSizeResponse {
-    private String pizzaId;
+//    private String pizzaId;
     private String sizeId;
     private String sizeName;
     private Boolean isAvailable;

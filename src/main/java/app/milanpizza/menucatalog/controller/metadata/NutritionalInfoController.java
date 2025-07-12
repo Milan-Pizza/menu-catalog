@@ -2,7 +2,6 @@ package app.milanpizza.menucatalog.controller.metadata;
 
 import app.milanpizza.menucatalog.dto.response.shared.NutritionalInfoResponse;
 import app.milanpizza.menucatalog.service.metadata.NutritionalInfoService;
-import app.milanpizza.menucatalog.controller.BaseController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/nutrition")
 @RequiredArgsConstructor
-public class NutritionalInfoController extends BaseController {
+public class NutritionalInfoController {
 
     private final NutritionalInfoService nutritionalInfoService;
 

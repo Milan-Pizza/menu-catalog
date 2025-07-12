@@ -12,7 +12,7 @@ import jakarta.validation.constraints.*;
 @Document(collection = "allowed_toppings")
 public class AllowedTopping extends BaseDocument {
     @Id
-    private String id; // Composite key handled separately
+    private String allowedToppingId;
 
     @NotBlank
     private String pizzaId;
