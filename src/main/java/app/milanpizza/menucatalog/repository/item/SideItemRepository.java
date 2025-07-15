@@ -18,4 +18,6 @@ public interface SideItemRepository extends MongoRepository<SideItem, String> {
     List<SideItem> findByIsVegetarian(boolean isVegetarian);
 
     List<SideItem> findByIsVegan(boolean isVegan);
+
+    boolean existsByNameAndMenuId(String name, String menuId);
 }

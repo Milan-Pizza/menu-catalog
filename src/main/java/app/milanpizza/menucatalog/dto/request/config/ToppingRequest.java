@@ -5,7 +5,7 @@ import lombok.Data;
 import jakarta.validation.constraints.*;
 
 @Data
-public class ToppingRequest {
+public class  ToppingRequest {
     @NotBlank
     @Size(max = 50)
     private String name;

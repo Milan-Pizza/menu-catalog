@@ -1,8 +1,8 @@
 package app.milanpizza.menucatalog.dto.response.pizza;
 
 import app.milanpizza.menucatalog.domain.enums.PizzaCategory;
-import app.milanpizza.menucatalog.dto.response.shared.NutritionalInfoResponse;
-import app.milanpizza.menucatalog.dto.response.shared.RecipeResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.NutritionalInfoResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.RecipeResponse;
 import lombok.Data;
 import java.util.List;
 import java.util.Map;

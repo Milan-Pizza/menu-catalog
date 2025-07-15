@@ -21,5 +21,8 @@ public interface ComboMapper {
     ComboDetailedResponse toDetailedResponse(ComboMeal combo);
 
     @IgnoreAuditFields
-    void updateEntity(UpdateComboRequest request, @MappingTarget ComboMeal combo);
+    ComboMeal updateEntity(UpdateComboRequest request, @MappingTarget ComboMeal combo);
+
+    ComboDetailedResponse toDetailedResponse(ComboDetailedResponse response);
+
 }

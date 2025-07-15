@@ -1,4 +1,4 @@
-package app.milanpizza.menucatalog.dto.response.shared;
+package app.milanpizza.menucatalog.dto.response.metadata;
 
 import lombok.Data;
 import java.time.LocalDateTime;

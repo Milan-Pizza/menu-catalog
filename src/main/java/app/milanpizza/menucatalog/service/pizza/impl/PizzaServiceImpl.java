@@ -1,11 +1,16 @@
 package app.milanpizza.menucatalog.service.pizza.impl;
 
+import app.milanpizza.menucatalog.domain.metadata.NutritionalInfo;
 import app.milanpizza.menucatalog.domain.pizza.*;
 import app.milanpizza.menucatalog.dto.request.pizza.*;
+import app.milanpizza.menucatalog.dto.response.metadata.NutritionalInfoResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.RecipeResponse;
 import app.milanpizza.menucatalog.dto.response.pizza.*;
 import app.milanpizza.menucatalog.exception.*;
 import app.milanpizza.menucatalog.mapper.*;
 import app.milanpizza.menucatalog.repository.*;
+import app.milanpizza.menucatalog.repository.metadata.NutritionalInfoRepository;
+import app.milanpizza.menucatalog.repository.metadata.RecipeRepository;
 import app.milanpizza.menucatalog.repository.pizza.*;
 import app.milanpizza.menucatalog.service.pizza.PizzaService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +34,8 @@ public class PizzaServiceImpl implements PizzaService {
     private final AvailableSizeRepository availableSizeRepository;
     private final ToppingRepository toppingRepository;
     private final AllowedToppingRepository allowedToppingRepository;
+    private final RecipeRepository recipeRepository;
+    private final NutritionalInfoRepository nutritionalInfoRepository;
 
     private final PizzaMapper pizzaMapper;
     private final PizzaBaseMapper pizzaBaseMapper;
@@ -36,6 +43,8 @@ public class PizzaServiceImpl implements PizzaService {
     private final AvailableSizeMapper availableSizeMapper;
     private final ToppingMapper toppingMapper;
     private final AllowedToppingMapper allowedToppingMapper;
+    private final RecipeMapper recipeMapper;
+    private final NutritionalInfoMapper nutritionalInfoMapper;
 
     @Override
     @Transactional
@@ -158,6 +167,8 @@ public class PizzaServiceImpl implements PizzaService {
         response.setPizzaBases(getAllPizzaBases());
         response.setAvailableSizes(getAvailableSizesForPizza(pizza.getPizzaId()));
         response.setAllowedToppings(getAllowedToppingsForPizza(pizza.getPizzaId()));
+        response.setRecipe(getRecipe(pizza.getPizzaId()));
+        response.setNutritionalInfo(getNutritionalInfo(pizza.getPizzaId()));
         return response;
     }
 
@@ -184,6 +195,18 @@ public class PizzaServiceImpl implements PizzaService {
         return allowedToppingRepository.findByPizzaId(pizzaId).stream()
                 .map(this::enrichToppingResponse)
                 .toList();
+    }
+
+    private RecipeResponse getRecipe(String pizzaId) {
+        return recipeRepository.findByPizzaId(pizzaId)
+                .map(recipeMapper::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found for pizza id: " + pizzaId));
+    }
+
+    private NutritionalInfoResponse getNutritionalInfo(String itemId) {
+        return nutritionalInfoRepository.findByItemId(itemId)
+                .map(nutritionalInfoMapper::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("Nutritional info not found for item id: " + itemId));
     }
 
     private AllowedToppingResponse enrichToppingResponse(AllowedTopping allowedTopping) {

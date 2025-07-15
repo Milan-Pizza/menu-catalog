@@ -1,7 +1,7 @@
 package app.milanpizza.menucatalog.cucumber.steps;
 
 import app.milanpizza.menucatalog.config.TestConfig;
-import app.milanpizza.menucatalog.dto.response.shared.NutritionalInfoResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.NutritionalInfoResponse;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

@@ -38,4 +38,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(422).body(response);
     }
 
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidOperation(InvalidOperationException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", ex.getMessage());
+        return ResponseEntity.status(403).body(response);
+    }
+
 }

@@ -1,6 +1,6 @@
 package app.milanpizza.menucatalog.dto.response.combo;
 
-import app.milanpizza.menucatalog.dto.response.shared.NutritionalInfoResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.NutritionalInfoResponse;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;

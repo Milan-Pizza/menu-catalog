@@ -18,4 +18,6 @@ public interface DrinkRepository extends MongoRepository<Drink, String> {
     List<Drink> findBySize(String size);
 
     List<Drink> findByIsCold(boolean isCold);
+
+    boolean existsByNameAndMenuId(String name, String menuId);
 }

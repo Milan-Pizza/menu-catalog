@@ -23,4 +23,6 @@ public interface ComboMealRepository extends MongoRepository<ComboMeal, String> 
 
     @Query("{'name': {$regex: ?0, $options: 'i'}}")
     List<ComboMeal> findByNameContainingIgnoreCase(String name);
+
+    boolean existsByNameAndMenuId(String name, String menuId);
 }

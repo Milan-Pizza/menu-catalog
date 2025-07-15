@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 public class ComboItemResponse {
-    private String comboId;
+//    private String comboId;
     private String itemId;
     private ItemType itemType;
     private String itemName;

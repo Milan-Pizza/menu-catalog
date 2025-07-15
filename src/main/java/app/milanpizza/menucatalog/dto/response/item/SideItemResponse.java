@@ -1,7 +1,7 @@
 package app.milanpizza.menucatalog.dto.response.item;
 
 import app.milanpizza.menucatalog.domain.enums.SideCategory;
-import app.milanpizza.menucatalog.dto.response.shared.NutritionalInfoResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.NutritionalInfoResponse;
 import lombok.Data;
 
 @Data

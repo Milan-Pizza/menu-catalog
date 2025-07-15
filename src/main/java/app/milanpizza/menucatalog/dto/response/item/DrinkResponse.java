@@ -2,7 +2,7 @@ package app.milanpizza.menucatalog.dto.response.item;
 
 import app.milanpizza.menucatalog.domain.enums.DrinkCategory;
 import app.milanpizza.menucatalog.domain.enums.DrinkSize;
-import app.milanpizza.menucatalog.dto.response.shared.NutritionalInfoResponse;
+import app.milanpizza.menucatalog.dto.response.metadata.NutritionalInfoResponse;
 import lombok.Data;
 
 @Data
